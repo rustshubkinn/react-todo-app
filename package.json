@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
+    "node-sass": "^4.14.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -39,7 +40,29 @@
       "prettier"
     ],
     "rules": {
-      "react/react-in-jsx-scope": 0
+      "react/react-in-jsx-scope": 0,
+      "jsx-a11y/label-has-associated-control": [
+        "error",
+        {
+          "required": {
+            "some": [
+              "nesting",
+              "id"
+            ]
+          }
+        }
+      ],
+      "jsx-a11y/label-has-for": [
+        "error",
+        {
+          "required": {
+            "some": [
+              "nesting",
+              "id"
+            ]
+          }
+        }
+      ]
     }
   },
   "browserslist": {
@@ -64,6 +87,7 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "husky": "^6.0.0",
     "prettier": "^2.2.1",
+    "sass-loader": "^11.0.1",
     "stylelint": "^13.13.1",
     "stylelint-config-sass-guidelines": "^8.0.0"
   }
