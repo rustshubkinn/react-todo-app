@@ -1,36 +1,38 @@
+import { useState } from 'react'
+
+import Todo from './components/Todo/Todo';
+
 import './App.scss';
-import React from 'react';
-import PropTypes from 'prop-types';
+import TodoForm from './components/TodoForm/TodoForm';
+
+
+const MOCK_TODOS = [
+  {
+    text: 'Learn React',
+    isCompleted: false,
+    id: 1,
+  },
+  {
+    text: 'Sleep',
+    isCompleted: false,
+    id: 2,
+  },
+  {
+    text: 'Build really cool todo app',
+    isCompleted: false,
+    id: 3,
+  },
+];
 
 function App() {
-  const [todos, setTodos] = React.useState([
-    {
-      text: 'Learn React',
-      isCompleted: false,
-      id: Math.random(),
-    },
-    {
-      text: 'Sleep',
-      isCompleted: false,
-      id: Math.random(),
-    },
-    {
-      text: 'Build really cool todo app',
-      isCompleted: false,
-      id: Math.random(),
-    },
-  ]);
+  const [todos, setTodos] = useState(MOCK_TODOS);
 
-  const addTodo = (obj) => {
-    const newTodos = [...todos, obj];
-    setTodos(newTodos);
-  };
+  const addTodo = (todo) => setTodos((prevState) => [...prevState, todo]);
 
   const completeTodo = (id) => {
     const newTodos = todos.map((todo) => {
       if (todo.id === id) {
-        // eslint-disable-next-line no-param-reassign
-        todo.isCompleted = true;
+        return {...todo, isCompleted: true};
       }
       return todo;
     });
@@ -38,75 +40,19 @@ function App() {
     setTodos(newTodos);
   };
 
+  const renderTodos = () =>
+    todos.map((todo) => (
+      <Todo key={todo.id} todo={todo} completeTodo={completeTodo} />
+  ))
+
   return (
     <div className="container">
       <div className="todo-list">
         <TodoForm addTodo={addTodo} />
-        {todos.map((todo, index) => (
-          <Todo
-            key={todo.id}
-            index={index}
-            todo={todo}
-            completeTodo={completeTodo}
-          />
-        ))}
+        {renderTodos()}
       </div>
     </div>
   );
 }
-
-// eslint-disable-next-line react/prop-types
-function Todo({ todo, completeTodo }) {
-  return (
-    <div
-      className="todo"
-      style={{ textDecoration: todo.isCompleted ? 'line-through' : '' }}
-    >
-      {todo.text}
-      <div>
-        <button
-          className="complete-btn"
-          type="button"
-          onClick={() => completeTodo(todo.id)}
-        >
-          Complete
-        </button>
-      </div>
-    </div>
-  );
-}
-Todo.propTypes = {
-  todo: PropTypes.objectOf.isRequired,
-};
-
-function TodoForm({ addTodo }) {
-  const [value, setValue] = React.useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!value) return;
-    const obj = {
-      text: value,
-      isCompleted: false,
-      id: Math.random(),
-    };
-    addTodo(obj);
-    setValue('');
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        className="input"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
-    </form>
-  );
-}
-TodoForm.propTypes = {
-  addTodo: PropTypes.objectOf.isRequired,
-};
 
 export default App;
