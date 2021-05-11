@@ -1,10 +1,9 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 import Todo from './components/Todo/Todo';
 
 import './App.scss';
 import TodoForm from './components/TodoForm/TodoForm';
-
 
 const MOCK_TODOS = [
   {
@@ -32,18 +31,22 @@ function App() {
   const completeTodo = (id) => {
     const newTodos = todos.map((todo) => {
       if (todo.id === id) {
-        return {...todo, isCompleted: true};
+        return { ...todo, isCompleted: !todo.isCompleted };
       }
       return todo;
-    });
+    })
+    setTodos(newTodos)
+  };
 
+  const deleteTodo = (id) => {
+    const newTodos = todos.filter((todo) => todo.id !== id);
     setTodos(newTodos);
   };
 
   const renderTodos = () =>
     todos.map((todo) => (
-      <Todo key={todo.id} todo={todo} completeTodo={completeTodo} />
-  ))
+      <Todo key={todo.id} todo={todo} completeTodo={completeTodo} deleteTodo={deleteTodo} />
+    ));
 
   return (
     <div className="container">
@@ -55,4 +58,4 @@ function App() {
   );
 }
 
-export default App;
+export default App

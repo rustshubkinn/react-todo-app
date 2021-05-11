@@ -1,10 +1,9 @@
-import { PropTypes } from "prop-types";
+import { PropTypes } from 'prop-types';
 
-function Todo({ todo, completeTodo }) {
+function Todo({ todo, completeTodo, deleteTodo }) {
   return (
     <div
-      className="todo"
-      style={{ textDecoration: todo.isCompleted ? 'line-through' : '' }}
+      className={todo.isCompleted ? 'completed' : 'todo'}
     >
       {todo.text}
       <div>
@@ -15,6 +14,13 @@ function Todo({ todo, completeTodo }) {
         >
           Complete
         </button>
+        <button
+          className="delete-btn"
+          type="button"
+          onClick={() => deleteTodo(todo.id)}
+        >
+          Delete
+        </button>
       </div>
     </div>
   );
@@ -22,6 +28,7 @@ function Todo({ todo, completeTodo }) {
 Todo.propTypes = {
   todo: PropTypes.objectOf(PropTypes.any).isRequired,
   completeTodo: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired
 };
 
 export default Todo;
