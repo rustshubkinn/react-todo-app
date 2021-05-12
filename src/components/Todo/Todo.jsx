@@ -1,26 +1,17 @@
 import { PropTypes } from 'prop-types';
+import Button from '../Button/Button';
 
-import styles from './Todo.module.scss'
+import styles from './Todo.module.scss';
 
 function Todo({ todo, completeTodo, deleteTodo }) {
   return (
-    <div className={todo.isCompleted ? `${styles.completed}` : `${styles.todo}`}>
+    <div
+      className={todo.isCompleted ? `${styles.completed}` : `${styles.todo}`}
+    >
       {todo.text}
       <div>
-        <button
-          className={styles.completebtn}
-          type="button"
-          onClick={() => completeTodo(todo.id)}
-        >
-          Complete
-        </button>
-        <button
-          className={styles.deletebtn}
-          type="button"
-          onClick={() => deleteTodo(todo.id)}
-        >
-          Delete
-        </button>
+        <Button type='button' onClick={() => completeTodo(todo.id)}>Complete</Button>
+        <Button type='button' onClick={() => deleteTodo(todo.id)}>Delete</Button>
       </div>
     </div>
   );

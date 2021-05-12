@@ -55,7 +55,7 @@ function App() {
 
   return (
     <div className="container">
-      <div className="todo-list">
+      <div className="todo_list">
         <TodoForm addTodo={addTodo} />
         {renderTodos()}
       </div>

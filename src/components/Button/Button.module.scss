@@ -1,0 +1,25 @@
+.btn {
+  color: #fff;
+  background: #2480aa;
+  font-family: 'Raleway', sans-serif;
+  transition: all 0.3s ease-in;
+  margin-left: 10px;
+  padding: 10px 7px;
+  border-radius: 6px;
+  border: 0;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+
+  &.submit {
+    position: relative;
+    left: 640px;
+    bottom: 65px;
+
+    &:hover {
+      background: #2ea7df;
+    }
+  }
+
+  &:hover {
+    background: #2ea7df;
+  }
+}
