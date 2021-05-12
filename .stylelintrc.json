@@ -3,6 +3,8 @@
     "stylelint-config-sass-guidelines"
   ],
   "rules": {
-    "order/properties-alphabetical-order": null
+    "order/properties-alphabetical-order": null,
+    "max-nesting-depth": 3,
+    "selector-class-pattern": "^([a-z][a-z0-9]*)(_[a-z0-9]+)*$"
   }
 }
