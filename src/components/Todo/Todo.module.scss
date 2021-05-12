@@ -1,0 +1,37 @@
+.todo,
+.completed {
+  color: #000;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 90%;
+  min-height: 70px;
+  border-radius: 5px;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  padding: 3px 12px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.completebtn,
+.deletebtn {
+  color: #fff;
+  background: #2480aa;
+  font-family: 'Raleway', sans-serif;
+  transition: all 0.3s ease-in;
+  margin-left: 10px;
+  padding: 10px 7px;
+  border-radius: 6px;
+  border: 0;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    background: #2ea7df;
+  }
+}
+
+.completed {
+  opacity: 30%;
+}

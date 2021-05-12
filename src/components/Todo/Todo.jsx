@@ -1,21 +1,21 @@
 import { PropTypes } from 'prop-types';
 
+import styles from './Todo.module.scss'
+
 function Todo({ todo, completeTodo, deleteTodo }) {
   return (
-    <div
-      className={todo.isCompleted ? 'completed' : 'todo'}
-    >
+    <div className={todo.isCompleted ? `${styles.completed}` : `${styles.todo}`}>
       {todo.text}
       <div>
         <button
-          className="complete-btn"
+          className={styles.completebtn}
           type="button"
           onClick={() => completeTodo(todo.id)}
         >
           Complete
         </button>
         <button
-          className="delete-btn"
+          className={styles.deletebtn}
           type="button"
           onClick={() => deleteTodo(todo.id)}
         >
@@ -28,7 +28,7 @@ function Todo({ todo, completeTodo, deleteTodo }) {
 Todo.propTypes = {
   todo: PropTypes.objectOf(PropTypes.any).isRequired,
   completeTodo: PropTypes.func.isRequired,
-  deleteTodo: PropTypes.func.isRequired
+  deleteTodo: PropTypes.func.isRequired,
 };
 
 export default Todo;

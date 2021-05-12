@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 import Todo from './components/Todo/Todo';
+import TodoForm from './components/TodoForm/TodoForm';
 
 import './App.scss';
-import TodoForm from './components/TodoForm/TodoForm';
 
 const MOCK_TODOS = [
   {
@@ -34,8 +34,8 @@ function App() {
         return { ...todo, isCompleted: !todo.isCompleted };
       }
       return todo;
-    })
-    setTodos(newTodos)
+    });
+    setTodos(newTodos);
   };
 
   const deleteTodo = (id) => {
@@ -45,7 +45,12 @@ function App() {
 
   const renderTodos = () =>
     todos.map((todo) => (
-      <Todo key={todo.id} todo={todo} completeTodo={completeTodo} deleteTodo={deleteTodo} />
+      <Todo
+        key={todo.id}
+        todo={todo}
+        completeTodo={completeTodo}
+        deleteTodo={deleteTodo}
+      />
     ));
 
   return (
@@ -58,4 +63,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
