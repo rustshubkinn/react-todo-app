@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Todo from './components/Todo/Todo';
 import TodoForm from './components/TodoForm/TodoForm';
 
-import './App.scss';
+import styles from './App.module.scss';
 
 const MOCK_TODOS = [
   {
@@ -54,8 +54,8 @@ function App() {
     ));
 
   return (
-    <div className="container">
-      <div className="todo_list">
+    <div className={styles.wrapper}>
+      <div className={styles.todo_wrapper}>
         <TodoForm addTodo={addTodo} />
         {renderTodos()}
       </div>
