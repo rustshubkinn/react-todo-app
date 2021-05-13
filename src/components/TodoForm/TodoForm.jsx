@@ -1,7 +1,7 @@
 import { PropTypes } from 'prop-types';
 import { useState } from 'react';
-import Button from '../Button/Button';
 
+import Button from '../Button/Button';
 import Input from '../Input/Input';
 
 import styles from './TodoForm.module.scss';
@@ -38,6 +38,7 @@ function TodoForm({ addTodo }) {
     </form>
   );
 }
+
 TodoForm.propTypes = {
   addTodo: PropTypes.func.isRequired,
 };
