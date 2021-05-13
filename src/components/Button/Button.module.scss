@@ -9,17 +9,13 @@
   border: 0;
   box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
 
-  &.submit {
-    position: relative;
-    left: 640px;
-    bottom: 65px;
-
-    &:hover {
-      background: #2ea7df;
-    }
-  }
-
   &:hover {
     background: #2ea7df;
   }
+}
+
+.submit {
+  position: relative;
+  left: 640px;
+  bottom: 65px;
 }
