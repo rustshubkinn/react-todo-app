@@ -10,7 +10,7 @@ const Button = ({ children, type, onClick, submit }) => (
     onClick={onClick}
     className={classNames({
       [classes.btn]: true,
-      [classes.submit]: submit
+      [classes.submit]: submit,
     })}
   >
     {children}
@@ -19,13 +19,14 @@ const Button = ({ children, type, onClick, submit }) => (
 
 Button.propTypes = {
   children: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   onClick: PropTypes.func.isRequired,
-  submit: PropTypes.bool
+  submit: PropTypes.bool,
 };
 
 Button.defaultProps = {
-  submit: false
-}
+  type: 'button',
+  submit: false,
+};
 
 export default Button;

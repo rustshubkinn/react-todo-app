@@ -10,8 +10,12 @@ function Todo({ todo, completeTodo, deleteTodo }) {
     >
       {todo.text}
       <div>
-        <Button type='button' onClick={() => completeTodo(todo.id)}>Complete</Button>
-        <Button type='button' onClick={() => deleteTodo(todo.id)}>Delete</Button>
+        <Button type="button" onClick={() => completeTodo(todo.id)}>
+          Complete
+        </Button>
+        <Button type="button" onClick={() => deleteTodo(todo.id)}>
+          Delete
+        </Button>
       </div>
     </div>
   );
