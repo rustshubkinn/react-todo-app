@@ -3,17 +3,15 @@ import classNames from 'classnames';
 
 import classes from './Input.module.scss';
 
-// eslint-disable-next-line react/prop-types
-// eslint-disable-next-line camelcase
-function Input({ onChange, type, placeholder, task_input, value }) {
+function Input({ onChange, type, placeholder, task, value }) {
   return (
     <input
       value={value}
-      type={type || 'text'}
+      type={type}
       placeholder={placeholder}
       className={classNames({
         [classes.input]: true,
-        [classes.task_input]: task_input,
+        [classes.task]: task,
       })}
       onChange={onChange}
     />
@@ -24,14 +22,14 @@ Input.propTypes = {
   onChange: PropTypes.func.isRequired,
   type: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
-  task_input: PropTypes.bool,
+  task: PropTypes.bool,
   value: PropTypes.string,
 };
 
 Input.defaultProps = {
   value: '',
   type: 'text',
-  task_input: false,
+  task: false,
 };
 
 export default Input;

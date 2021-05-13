@@ -30,7 +30,7 @@ function TodoForm({ addTodo }) {
         onChange={(e) => setValue(e.target.value)}
         value={value}
         placeholder="Enter task here!"
-        task_input
+        task
       />
       <Button type="submit" submit onClick={handleSubmit}>
         Add Task
