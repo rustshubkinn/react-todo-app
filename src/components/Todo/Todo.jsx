@@ -1,32 +1,40 @@
+import { useState } from 'react';
 import classNames from 'classnames';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
+
 import Button from '../Button/Button';
 
 import styles from './Todo.module.scss';
 
-function Todo({ todo, completeTodo, deleteTodo }) {
+const Todo = ({ text, id, isCompleted, deleteTodo }) => {
+  const [completed, setCompleted] = useState(isCompleted);
+
+  const completeTodo = () => setCompleted(!completed);
+
   return (
     <div
       className={classNames({
         [styles.todo]: true,
-        [styles.completed]: todo.isCompleted,
+        [styles.completed]: completed,
       })}
     >
-      {todo.text}
+      {text}
       <div>
-        <Button type="button" onClick={() => completeTodo(todo.id)}>
+        <Button type="button" onClick={completeTodo}>
           Complete
         </Button>
-        <Button type="button" onClick={() => deleteTodo(todo.id)}>
+        <Button type="button" onClick={() => deleteTodo(id)}>
           Delete
         </Button>
       </div>
     </div>
   );
-}
+};
+
 Todo.propTypes = {
-  todo: PropTypes.objectOf(PropTypes.any).isRequired,
-  completeTodo: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+  isCompleted: PropTypes.bool.isRequired,
+  id: PropTypes.number.isRequired,
   deleteTodo: PropTypes.func.isRequired,
 };
 

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import Todo from './components/Todo/Todo';
 import TodoForm from './components/TodoForm/TodoForm';
+import TodoList from './components/TodoList/TodoList';
 
-import styles from './App.module.scss';
+import classes from './App.module.scss';
 
 const MOCK_TODOS = [
   {
@@ -23,44 +23,17 @@ const MOCK_TODOS = [
   },
 ];
 
-function App() {
+const App = () => {
   const [todos, setTodos] = useState(MOCK_TODOS);
 
-  const addTodo = (todo) => setTodos((prevState) => [...prevState, todo]);
-
-  const completeTodo = (id) => {
-    const newTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return { ...todo, isCompleted: !todo.isCompleted };
-      }
-      return todo;
-    });
-    setTodos(newTodos);
-  };
-
-  const deleteTodo = (id) => {
-    const newTodos = todos.filter((todo) => todo.id !== id);
-    setTodos(newTodos);
-  };
-
-  const renderTodos = () =>
-    todos.map((todo) => (
-      <Todo
-        key={todo.id}
-        todo={todo}
-        completeTodo={completeTodo}
-        deleteTodo={deleteTodo}
-      />
-    ));
-
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.todo_wrapper}>
-        <TodoForm addTodo={addTodo} />
-        {renderTodos()}
+    <div className={classes.wrapper}>
+      <div className={classes.todo_list_wrapper}>
+        <TodoForm setTodos={setTodos} />
+        <TodoList todos={todos} setTodos={setTodos} />
       </div>
     </div>
   );
-}
+};
 
 export default App;

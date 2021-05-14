@@ -1,13 +1,15 @@
-import { PropTypes } from 'prop-types';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 
-import styles from './TodoForm.module.scss';
+import classes from './TodoForm.module.scss';
 
-function TodoForm({ addTodo }) {
+const TodoForm = ({ setTodos }) => {
   const [value, setValue] = useState('');
+
+  const addTodo = (todo) => setTodos((prevState) => [...prevState, todo]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,22 +27,22 @@ function TodoForm({ addTodo }) {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={classes.form} onSubmit={handleSubmit}>
       <Input
         onChange={(e) => setValue(e.target.value)}
         value={value}
         placeholder="Enter task here!"
-        task
+        todoInput
       />
       <Button type="submit" submit onClick={handleSubmit}>
         Add Task
       </Button>
     </form>
   );
-}
+};
 
 TodoForm.propTypes = {
-  addTodo: PropTypes.func.isRequired,
+  setTodos: PropTypes.func.isRequired,
 };
 
 export default TodoForm;
