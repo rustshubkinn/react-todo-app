@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+
 import Todo from '../Todo/Todo';
 
 import classes from './TodoList.module.scss';
