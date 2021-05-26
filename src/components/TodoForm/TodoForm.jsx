@@ -33,6 +33,7 @@ const TodoForm = ({ setTodos }) => {
         value={value}
         placeholder="Enter task here!"
         todoInput
+        main
       />
       <Button type="submit" submit onClick={handleSubmit}>
         Add Task
