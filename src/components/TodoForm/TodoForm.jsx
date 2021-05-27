@@ -5,11 +5,22 @@ import Button from '../Button/Button';
 import Input from '../Input/Input';
 
 import classes from './TodoForm.module.scss';
+import URL from '../URL/URL';
 
 const TodoForm = ({ setTodos }) => {
   const [value, setValue] = useState('');
 
-  const addTodo = (todo) => setTodos((prevState) => [...prevState, todo]);
+  const postTodo = async (newTodo) => {
+    const options = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...newTodo }),
+    };
+
+    await fetch(URL, options).then(() => {
+      setTodos((prevState) => [newTodo, ...prevState]);
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +33,7 @@ const TodoForm = ({ setTodos }) => {
       id: Math.random(),
     };
 
-    addTodo(newTodo);
+    postTodo(newTodo);
     setValue('');
   };
 
