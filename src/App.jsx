@@ -2,12 +2,10 @@ import { useEffect, useState } from 'react';
 
 import TodoForm from './components/TodoForm/TodoForm';
 import TodoList from './components/TodoList/TodoList';
+import URL from './components/URL/URL';
 
 import classes from './App.module.scss';
 import Loader from './components/Loader/Loader';
-
-const URL =
-  'https://todo-list-544c0-default-rtdb.europe-west1.firebasedatabase.app/todos.json';
 
 const App = () => {
   const [todos, setTodos] = useState([]);
