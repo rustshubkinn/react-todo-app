@@ -1,8 +1,8 @@
 const URL =
-  'https://todo-list-544c0-default-rtdb.europe-west1.firebasedatabase.app/todos.json';
+  'https://todo-list-544c0-default-rtdb.europe-west1.firebasedatabase.app/todos';
 
 export const fetchTodo = async () => {
-  const response = await fetch(URL);
+  const response = await fetch(`${URL}.json`);
   const result = await response.json();
   const normalizedTodos = Object.keys(result).map((k) => ({
     ...result[k],
@@ -18,5 +18,13 @@ export const postTodo = async (newTodo) => {
     body: JSON.stringify(newTodo),
   };
 
-  await fetch(URL, options);
+  await fetch(`${URL}.json`, options);
+};
+
+export const fetchDeleteTodo = async (id) => {
+  const options = {
+    method: 'DELETE',
+  };
+
+  await fetch(`${URL}/${id}.json`, options);
 };

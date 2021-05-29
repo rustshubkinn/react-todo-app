@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
 
 import Todo from '../Todo/Todo';
+import { fetchTodo, fetchDeleteTodo } from '../../api/api';
 
 import classes from './TodoList.module.scss';
 
 const TodoList = ({ todos, setTodos }) => {
-  const deleteTodo = (id) => {
-    const newTodos = todos.filter((todo) => todo.id !== id);
+  const deleteTodo = async (id) => {
+    await fetchDeleteTodo(id);
+    const newTodos = await fetchTodo();
     setTodos(newTodos);
   };
 
