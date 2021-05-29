@@ -34,7 +34,7 @@ const Todo = ({ text, id, isCompleted, deleteTodo }) => {
 Todo.propTypes = {
   text: PropTypes.string.isRequired,
   isCompleted: PropTypes.bool.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   deleteTodo: PropTypes.func.isRequired,
 };
 

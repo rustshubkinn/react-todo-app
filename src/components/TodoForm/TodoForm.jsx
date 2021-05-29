@@ -1,12 +1,13 @@
 import { useState } from 'react';
+import { PropTypes } from 'prop-types';
 
 import Button from '../Button/Button';
 import Input from '../Input/Input';
-import { postTodo } from '../../api/api';
+import { postTodo, fetchTodo } from '../../api/api';
 
 import classes from './TodoForm.module.scss';
 
-const TodoForm = () => {
+const TodoForm = ({ setTodos }) => {
   const [value, setValue] = useState('');
 
   const handleSubmit = async (e) => {
@@ -15,12 +16,13 @@ const TodoForm = () => {
     if (!value) return;
 
     const newTodo = {
-      id: Math.random(),
       isCompleted: false,
       text: value,
     };
 
-    postTodo(newTodo);
+    await postTodo(newTodo);
+    const todos = await fetchTodo();
+    setTodos(todos);
     setValue('');
   };
 
@@ -38,6 +40,10 @@ const TodoForm = () => {
       </Button>
     </form>
   );
+};
+
+TodoForm.propTypes = {
+  setTodos: PropTypes.func.isRequired,
 };
 
 export default TodoForm;

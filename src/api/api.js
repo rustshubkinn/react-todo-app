@@ -4,7 +4,10 @@ const URL =
 export const fetchTodo = async () => {
   const response = await fetch(URL);
   const result = await response.json();
-  const normalizedTodos = Object.keys(result).map((k) => result[k]);
+  const normalizedTodos = Object.keys(result).map((k) => ({
+    ...result[k],
+    id: k,
+  }));
   return normalizedTodos;
 };
 
@@ -15,5 +18,5 @@ export const postTodo = async (newTodo) => {
     body: JSON.stringify(newTodo),
   };
 
-  await fetch(URL, options).then(fetchTodo());
+  await fetch(URL, options);
 };

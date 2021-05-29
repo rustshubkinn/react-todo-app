@@ -13,7 +13,8 @@ const App = () => {
 
   const fetchData = async () => {
     setLoading(true);
-    setTodos(await fetchTodo());
+    const todoList = await fetchTodo();
+    setTodos(todoList);
     setLoading(false);
   };
 
