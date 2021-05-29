@@ -1,36 +1,23 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 
 import Button from '../Button/Button';
 import Input from '../Input/Input';
+import { postTodo } from '../../api/api';
 
 import classes from './TodoForm.module.scss';
-import URL from '../URL/URL';
 
-const TodoForm = ({ setTodos }) => {
+const TodoForm = () => {
   const [value, setValue] = useState('');
 
-  const postTodo = async (newTodo) => {
-    const options = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...newTodo }),
-    };
-
-    await fetch(URL, options).then(() => {
-      setTodos((prevState) => [newTodo, ...prevState]);
-    });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!value) return;
 
     const newTodo = {
-      text: value,
-      isCompleted: false,
       id: Math.random(),
+      isCompleted: false,
+      text: value,
     };
 
     postTodo(newTodo);
@@ -51,10 +38,6 @@ const TodoForm = ({ setTodos }) => {
       </Button>
     </form>
   );
-};
-
-TodoForm.propTypes = {
-  setTodos: PropTypes.func.isRequired,
 };
 
 export default TodoForm;

@@ -2,29 +2,23 @@ import { useEffect, useState } from 'react';
 
 import TodoForm from './components/TodoForm/TodoForm';
 import TodoList from './components/TodoList/TodoList';
-import URL from './components/URL/URL';
+import { fetchTodo } from './api/api';
 
-import classes from './App.module.scss';
 import Loader from './components/Loader/Loader';
+import classes from './App.module.scss';
 
 const App = () => {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchTodos = async () => {
+  const fetchData = async () => {
     setLoading(true);
-
-    const response = await fetch(URL);
-    const result = await response.json();
-
-    const normalizedTodos = Object.keys(result).map((k) => result[k]);
-
-    setTodos(normalizedTodos);
+    setTodos(await fetchTodo());
     setLoading(false);
   };
 
   useEffect(() => {
-    fetchTodos();
+    fetchData();
   }, []);
 
   return (
