@@ -1,18 +1,18 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  text-align: start;
   align-items: center;
+  justify-content: flex-start;
   max-width: 1370px;
   margin: 0 auto;
+  text-align: start;
 }
 
 .todo_list_wrapper {
-  background: #ececec;
   width: 800px;
-  border-radius: 10px;
   margin-top: 30px;
   padding: 20px;
+  background: #ececec;
+  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
