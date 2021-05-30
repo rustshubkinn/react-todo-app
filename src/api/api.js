@@ -21,7 +21,7 @@ export const postTodo = async (newTodo) => {
   await fetch(`${URL}.json`, options);
 };
 
-export const fetchDeleteTodo = async (id) => {
+export const deleteTodo = async (id) => {
   const options = {
     method: 'DELETE',
   };

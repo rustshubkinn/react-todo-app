@@ -1,17 +1,10 @@
 import PropTypes from 'prop-types';
 
 import Todo from '../Todo/Todo';
-import { fetchTodo, fetchDeleteTodo } from '../../api/api';
 
 import classes from './TodoList.module.scss';
 
 const TodoList = ({ todos, setTodos }) => {
-  const deleteTodo = async (id) => {
-    await fetchDeleteTodo(id);
-    const newTodos = await fetchTodo();
-    setTodos(newTodos);
-  };
-
   const renderTodos = () =>
     todos.map((todo) => (
       <Todo
@@ -19,7 +12,7 @@ const TodoList = ({ todos, setTodos }) => {
         text={todo.text}
         id={todo.id}
         isCompleted={todo.isCompleted}
-        deleteTodo={deleteTodo}
+        setTodos={setTodos}
       />
     ));
 
