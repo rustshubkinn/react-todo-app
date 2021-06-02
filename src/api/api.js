@@ -28,3 +28,23 @@ export const deleteTodo = async (id) => {
 
   await fetch(`${URL}/${id}.json`, options);
 };
+
+export const completeTodo = async (id) => {
+  const options = {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ isCompleted: true }),
+  };
+
+  await fetch(`${URL}/${id}.json`, options);
+};
+
+export const uncompleteTodo = async (id) => {
+  const options = {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ isCompleted: false }),
+  };
+
+  await fetch(`${URL}/${id}.json`, options);
+};

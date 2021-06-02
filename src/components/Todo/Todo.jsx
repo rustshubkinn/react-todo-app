@@ -6,13 +6,28 @@ import Button from '../Button/Button';
 import Loader from '../Loader/Loader';
 
 import styles from './Todo.module.scss';
-import { fetchTodo, deleteTodo } from '../../api/api';
+
+import {
+  fetchTodo,
+  deleteTodo,
+  completeTodo,
+  uncompleteTodo,
+} from '../../api/api';
 
 const Todo = ({ text, id, isCompleted, setTodos }) => {
   const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(isCompleted);
 
-  const completeTodo = () => setCompleted(!completed);
+  const completeToggler = () =>
+    completed ? uncompleteTodo(id) : completeTodo(id);
+
+  const completeTodoHandler = async () => {
+    setLoading(true);
+    setCompleted(!completed);
+    completeToggler();
+    fetchTodo();
+    setLoading(false);
+  };
 
   const deleteTodoHandler = async () => {
     setLoading(true);
@@ -32,7 +47,7 @@ const Todo = ({ text, id, isCompleted, setTodos }) => {
       {loading && <Loader />}
       {text}
       <div>
-        <Button type="button" onClick={completeTodo}>
+        <Button type="button" onClick={completeTodoHandler}>
           Complete
         </Button>
         <Button type="button" onClick={deleteTodoHandler}>
