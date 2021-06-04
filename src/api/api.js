@@ -48,3 +48,16 @@ export const uncompleteTodo = async (id) => {
 
   await fetch(`${URL}/${id}.json`, options);
 };
+
+export const editTodo = async (id, editedTodo) => {
+  const options = {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(editedTodo),
+  };
+
+  await fetch(`${URL}/${id}.json`, options);
+  const response = await fetch(`${URL}.json`);
+  const result = await response.json();
+  return result;
+};
