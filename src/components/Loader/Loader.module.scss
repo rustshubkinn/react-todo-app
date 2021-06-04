@@ -2,6 +2,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
+
   display: inline-block;
   width: 80px;
   height: 80px;
@@ -14,21 +15,26 @@
   bottom: 0;
   left: 0;
   z-index: 1;
+
   background-color: rgba(255, 255, 255, 0.3);
 }
 
 .ldsroller div {
   transform-origin: 40px 40px;
+
   animation: ldsroller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 
   &::after {
     position: absolute;
+
     display: block;
     width: 7px;
     height: 7px;
     margin: -4px 0 0 -4px;
+
     background: #fff;
     border-radius: 50%;
+
     content: ' ';
   }
 
