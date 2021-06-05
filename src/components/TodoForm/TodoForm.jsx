@@ -16,7 +16,9 @@ const TodoForm = ({ id, todoText, setTodos, setEditMode }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!value) return;
+    if (!value) {
+      return;
+    }
 
     setLoading(true);
 
@@ -35,7 +37,9 @@ const TodoForm = ({ id, todoText, setTodos, setEditMode }) => {
     setTodos(todos);
     setValue('');
     setLoading(false);
-    if (setEditMode) setEditMode(false);
+    if (setEditMode) {
+      setEditMode(false);
+    }
   };
 
   return (

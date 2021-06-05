@@ -4,7 +4,9 @@ const URL =
 export const fetchTodo = async () => {
   const response = await fetch(`${URL}.json`);
   const result = await response.json();
-  if (!result) return [];
+  if (!result) {
+    return [];
+  }
   const normalizedTodos = Object.keys(result).map((k) => ({
     ...result[k],
     id: k,

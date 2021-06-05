@@ -4,7 +4,9 @@ import classNames from 'classnames';
 import classes from './Loader.module.scss';
 
 const Loader = ({ loading }) => {
-  if (!loading) return <></>;
+  if (!loading) {
+    return <></>;
+  }
   return (
     <div
       className={classNames({
