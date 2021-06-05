@@ -24,14 +24,11 @@ const App = () => {
 
   return (
     <div className={classes.wrapper}>
-      {loading ? (
-        <Loader />
-      ) : (
-        <div className={classes.todo_list_wrapper}>
-          <TodoForm setTodos={setTodos} />
-          <TodoList todos={todos} setTodos={setTodos} />
-        </div>
-      )}
+      <Loader loading={loading} />
+      <div className={classes.todo_list_wrapper}>
+        <TodoForm setTodos={setTodos} />
+        <TodoList todos={todos} setTodos={setTodos} />
+      </div>
     </div>
   );
 };

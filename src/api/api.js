@@ -4,6 +4,7 @@ const URL =
 export const fetchTodo = async () => {
   const response = await fetch(`${URL}.json`);
   const result = await response.json();
+  if (!result) return [];
   const normalizedTodos = Object.keys(result).map((k) => ({
     ...result[k],
     id: k,
@@ -29,35 +30,22 @@ export const deleteTodo = async (id) => {
   await fetch(`${URL}/${id}.json`, options);
 };
 
-export const completeTodo = async (id) => {
+export const completeTodo = async (id, isCompleted) => {
   const options = {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ isCompleted: true }),
+    body: JSON.stringify({ isCompleted: !isCompleted }),
   };
 
   await fetch(`${URL}/${id}.json`, options);
 };
 
-export const uncompleteTodo = async (id) => {
+export const editTodo = async (id, newTodo) => {
   const options = {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ isCompleted: false }),
+    body: JSON.stringify(newTodo),
   };
 
   await fetch(`${URL}/${id}.json`, options);
-};
-
-export const editTodo = async (id, editedTodo) => {
-  const options = {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(editedTodo),
-  };
-
-  await fetch(`${URL}/${id}.json`, options);
-  const response = await fetch(`${URL}.json`);
-  const result = await response.json();
-  return result;
 };

@@ -4,32 +4,21 @@ import PropTypes from 'prop-types';
 
 import Button from '../Button/Button';
 import Loader from '../Loader/Loader';
+import TodoForm from '../TodoForm/TodoForm';
+
+import { fetchTodo, deleteTodo, completeTodo } from '../../api/api';
 
 import classes from './Todo.module.scss';
 
-import {
-  fetchTodo,
-  deleteTodo,
-  completeTodo,
-  uncompleteTodo,
-  editTodo,
-} from '../../api/api';
-import Input from '../Input/Input';
-
 const Todo = ({ text, id, isCompleted, setTodos }) => {
   const [loading, setLoading] = useState(false);
-  const [completed, setCompleted] = useState(isCompleted);
-  const [editing, setEditing] = useState(false);
-  const [value, setValue] = useState('');
-
-  const completeToggler = () =>
-    completed ? uncompleteTodo(id) : completeTodo(id);
+  const [editMode, setEditMode] = useState(false);
 
   const completeTodoHandler = async () => {
     setLoading(true);
-    setCompleted(!completed);
-    completeToggler();
-    fetchTodo();
+    await completeTodo(id, isCompleted);
+    const newTodos = await fetchTodo();
+    setTodos(newTodos);
     setLoading(false);
   };
 
@@ -37,57 +26,30 @@ const Todo = ({ text, id, isCompleted, setTodos }) => {
     setLoading(true);
     await deleteTodo(id);
     const newTodos = await fetchTodo();
+    setLoading(false);
     setTodos(newTodos);
-    setLoading(false);
   };
 
-  const editTodoHandler = async () => {
-    setValue(text);
-    setEditing(true);
-  };
-
-  const handleEdit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    if (!value) return;
-
-    const editedTodo = {
-      text: value,
-    };
-
-    await editTodo(id, editedTodo);
-    const todos = await fetchTodo();
-
-    setTodos(todos);
-    setEditing(false);
-    setLoading(false);
-  };
+  const editTodoHandler = () => setEditMode(!editMode);
 
   return (
     <div>
-      {loading && <Loader />}
-      {editing ? (
-        <form className={classes.editform} onSubmit={handleEdit}>
-          <Input
-            value={value}
-            placeholder="Edit task"
-            todoInput
-            main
-            onChange={(e) => setValue(e.target.value)}
-          />
-          <Button type="submit" submit onClick={handleEdit}>
-            Edit Task
-          </Button>
-        </form>
+      <Loader loading={loading} />
+      {editMode ? (
+        <TodoForm
+          id={id}
+          todoText={text}
+          setTodos={setTodos}
+          setEditMode={setEditMode}
+        />
       ) : (
         <div
           className={classNames({
             [classes.todo]: true,
-            [classes.completed]: completed,
+            [classes.completed]: isCompleted,
           })}
         >
-          {text}
+          <p>{text}</p>
           <div>
             <Button type="button" onClick={completeTodoHandler}>
               Complete
