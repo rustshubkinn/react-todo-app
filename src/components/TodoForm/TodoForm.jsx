@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { PropTypes } from 'prop-types';
+import { func, string } from 'prop-types';
 
 import Button from 'components/UI/Button/Button';
 import Input from 'components/UI/Input/Input';
@@ -60,10 +60,10 @@ const TodoForm = ({ id, todoText, setTodos, setEditMode }) => {
 };
 
 TodoForm.propTypes = {
-  setTodos: PropTypes.func.isRequired,
-  id: PropTypes.string,
-  todoText: PropTypes.string,
-  setEditMode: PropTypes.func,
+  setTodos: func.isRequired,
+  id: string,
+  todoText: string,
+  setEditMode: func,
 };
 
 TodoForm.defaultProps = {

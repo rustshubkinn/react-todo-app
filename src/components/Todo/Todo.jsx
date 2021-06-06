@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
+import { bool, func, string } from 'prop-types';
 
 import Button from 'components/UI/Button/Button';
 import Loader from 'components/UI/Loader/Loader';
@@ -68,10 +68,10 @@ const Todo = ({ text, id, isCompleted, setTodos }) => {
 };
 
 Todo.propTypes = {
-  text: PropTypes.string.isRequired,
-  isCompleted: PropTypes.bool.isRequired,
-  id: PropTypes.string.isRequired,
-  setTodos: PropTypes.func.isRequired,
+  text: string.isRequired,
+  isCompleted: bool.isRequired,
+  id: string.isRequired,
+  setTodos: func.isRequired,
 };
 
 export default Todo;

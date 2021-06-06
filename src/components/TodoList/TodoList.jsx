@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes, { arrayOf, func } from 'prop-types';
 
 import Todo from 'components/Todo/Todo';
 
@@ -20,8 +20,8 @@ const TodoList = ({ todos, setTodos }) => {
 };
 
 TodoList.propTypes = {
-  todos: PropTypes.arrayOf(PropTypes.any).isRequired,
-  setTodos: PropTypes.func.isRequired,
+  todos: arrayOf(PropTypes.any).isRequired,
+  setTodos: func.isRequired,
 };
 
 export default TodoList;
