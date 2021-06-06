@@ -2,8 +2,8 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import Button from 'components/Button/Button';
-import Loader from 'components/Loader/Loader';
+import Button from 'components/UI/Button/Button';
+import Loader from 'components/UI/Loader/Loader';
 import TodoForm from 'components/TodoForm/TodoForm';
 
 import { fetchTodo, deleteTodo, completeTodo } from 'api/api';

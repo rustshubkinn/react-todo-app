@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { PropTypes } from 'prop-types';
 
-import Button from 'components/Button/Button';
-import Input from 'components/Input/Input';
-import Loader from 'components/Loader/Loader';
+import Button from 'components/UI/Button/Button';
+import Input from 'components/UI/Input/Input';
+import Loader from 'components/UI/Loader/Loader';
 
 import { postTodo, fetchTodo, editTodo } from 'api/api';
 

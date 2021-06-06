@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import Loader from 'components/Loader/Loader';
+import Loader from 'components/UI/Loader/Loader';
 import TodoForm from 'components/TodoForm/TodoForm';
 import TodoList from 'components/TodoList/TodoList';
 
