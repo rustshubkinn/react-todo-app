@@ -2,8 +2,6 @@ import { arrayOf, func, shape } from 'prop-types';
 
 import Todo from 'components/Todo/Todo';
 
-import classes from './TodoList.module.scss';
-
 const TodoList = ({ todos, setTodos }) => {
   const renderTodos = () =>
     todos.map((todo) => (
@@ -16,7 +14,7 @@ const TodoList = ({ todos, setTodos }) => {
       />
     ));
 
-  return <div className={classes.todo_list}>{renderTodos()}</div>;
+  return <div>{renderTodos()}</div>;
 };
 
 TodoList.propTypes = {

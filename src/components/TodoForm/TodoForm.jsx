@@ -49,7 +49,6 @@ const TodoForm = ({ id, todoText, setTodos, setEditMode }) => {
         onChange={(e) => setValue(e.target.value)}
         value={value}
         placeholder="Enter task here!"
-        todoInput
         main
       />
       <Button type="submit" submit onClick={handleSubmit}>

@@ -6,8 +6,8 @@ import TodoList from 'components/TodoList/TodoList';
 
 import { fetchTodo } from 'api/api';
 
-import classes from './App.module.scss';
 import './global.scss';
+import classes from './App.module.scss';
 
 const App = () => {
   const [todos, setTodos] = useState([]);
