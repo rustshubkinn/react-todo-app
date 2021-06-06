@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import Todo from '../Todo/Todo';
+import Todo from 'components/Todo/Todo';
 
 import classes from './TodoList.module.scss';
 

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { PropTypes } from 'prop-types';
 
-import Button from '../Button/Button';
-import Input from '../Input/Input';
-import Loader from '../Loader/Loader';
+import Button from 'components/Button/Button';
+import Input from 'components/Input/Input';
+import Loader from 'components/Loader/Loader';
 
-import { postTodo, fetchTodo, editTodo } from '../../api/api';
+import { postTodo, fetchTodo, editTodo } from 'api/api';
 
 import classes from './TodoForm.module.scss';
 

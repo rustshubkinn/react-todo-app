@@ -2,11 +2,11 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import Button from '../Button/Button';
-import Loader from '../Loader/Loader';
-import TodoForm from '../TodoForm/TodoForm';
+import Button from 'components/Button/Button';
+import Loader from 'components/Loader/Loader';
+import TodoForm from 'components/TodoForm/TodoForm';
 
-import { fetchTodo, deleteTodo, completeTodo } from '../../api/api';
+import { fetchTodo, deleteTodo, completeTodo } from 'api/api';
 
 import classes from './Todo.module.scss';
 

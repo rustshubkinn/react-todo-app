@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 
-import TodoForm from './components/TodoForm/TodoForm';
-import TodoList from './components/TodoList/TodoList';
-import { fetchTodo } from './api/api';
+import Loader from 'components/Loader/Loader';
+import TodoForm from 'components/TodoForm/TodoForm';
+import TodoList from 'components/TodoList/TodoList';
 
-import Loader from './components/Loader/Loader';
+import { fetchTodo } from 'api/api';
+
 import classes from './App.module.scss';
+import './global.scss';
 
 const App = () => {
   const [todos, setTodos] = useState([]);
