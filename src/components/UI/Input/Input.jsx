@@ -1,9 +1,9 @@
-import { bool, func, string } from 'prop-types';
+import { func, string } from 'prop-types';
 import classNames from 'classnames';
 
 import classes from './Input.module.scss';
 
-const Input = ({ onChange, type, placeholder, main, value }) => (
+const Input = ({ onChange, type, placeholder, className, value }) => (
   <input
     value={value}
     type={type}
@@ -11,7 +11,7 @@ const Input = ({ onChange, type, placeholder, main, value }) => (
     onChange={onChange}
     className={classNames({
       [classes.input]: true,
-      [classes.main]: main,
+      [className]: className,
     })}
   />
 );
@@ -20,14 +20,14 @@ Input.propTypes = {
   onChange: func.isRequired,
   type: string,
   placeholder: string.isRequired,
-  main: bool,
   value: string,
+  className: string,
 };
 
 Input.defaultProps = {
   value: '',
   type: 'text',
-  main: false,
+  className: null,
 };
 
 export default Input;

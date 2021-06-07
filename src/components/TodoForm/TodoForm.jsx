@@ -49,9 +49,13 @@ const TodoForm = ({ id, todoText, setTodos, setEditMode }) => {
         onChange={(e) => setValue(e.target.value)}
         value={value}
         placeholder="Enter task here!"
-        main
+        className={classes.main_input}
       />
-      <Button type="submit" submit onClick={handleSubmit}>
+      <Button
+        type="submit"
+        className={classes.btn_submit}
+        onClick={handleSubmit}
+      >
         {id ? 'Edit Task' : 'Add Task'}
       </Button>
     </form>

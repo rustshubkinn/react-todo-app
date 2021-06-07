@@ -1,17 +1,17 @@
 /* eslint-disable react/button-has-type */
 
 import classNames from 'classnames';
-import { bool, func, string } from 'prop-types';
+import { func, string } from 'prop-types';
 
 import classes from './Button.module.scss';
 
-const Button = ({ children, type, onClick, submit }) => (
+const Button = ({ children, type, onClick, className }) => (
   <button
     type={type}
     onClick={onClick}
     className={classNames({
       [classes.btn]: true,
-      [classes.submit]: submit,
+      [className]: className,
     })}
   >
     {children}
@@ -22,12 +22,12 @@ Button.propTypes = {
   children: string.isRequired,
   type: string,
   onClick: func.isRequired,
-  submit: bool,
+  className: string,
 };
 
 Button.defaultProps = {
   type: 'button',
-  submit: false,
+  className: null,
 };
 
 export default Button;
