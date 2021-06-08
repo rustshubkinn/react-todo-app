@@ -1,6 +1,7 @@
 import { arrayOf, func, shape } from 'prop-types';
 
 import Todo from 'components/Todo/Todo';
+import classes from './TodoList.module.scss';
 
 const TodoList = ({ todos, setTodos }) => {
   const renderTodos = () =>
@@ -11,6 +12,7 @@ const TodoList = ({ todos, setTodos }) => {
         id={todo.id}
         isCompleted={todo.isCompleted}
         setTodos={setTodos}
+        className={classes.todo}
       />
     ));
 

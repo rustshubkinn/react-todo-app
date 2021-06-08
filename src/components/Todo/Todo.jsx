@@ -10,7 +10,7 @@ import { fetchTodo, deleteTodo, completeTodo } from 'api/api';
 
 import classes from './Todo.module.scss';
 
-const Todo = ({ text, id, isCompleted, setTodos }) => {
+const Todo = ({ text, id, isCompleted, setTodos, className }) => {
   const [loading, setLoading] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
@@ -47,6 +47,7 @@ const Todo = ({ text, id, isCompleted, setTodos }) => {
           className={classNames({
             [classes.todo]: true,
             [classes.completed]: isCompleted,
+            [className]: className,
           })}
         >
           <p>{text}</p>
@@ -78,6 +79,11 @@ Todo.propTypes = {
   isCompleted: bool.isRequired,
   id: string.isRequired,
   setTodos: func.isRequired,
+  className: string,
+};
+
+Todo.defaultProps = {
+  className: null,
 };
 
 export default Todo;
