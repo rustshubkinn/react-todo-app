@@ -54,7 +54,9 @@ const Todo = ({ text, id, isCompleted, setTodos }) => {
             <Button
               classNames={classes.btn_check}
               onClick={completeTodoHandler}
-            />
+            >
+              Complete
+            </Button>
             <Button
               className={classes.btn_handlers}
               onClick={deleteTodoHandler}
