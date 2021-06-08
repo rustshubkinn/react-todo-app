@@ -53,7 +53,7 @@ const Todo = ({ text, id, isCompleted, setTodos, className }) => {
           <p>{text}</p>
           <div>
             <Button
-              classNames={classes.btn_check}
+              className={classes.btn_handlers}
               onClick={completeTodoHandler}
             >
               Complete
