@@ -2,9 +2,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 97%;
-  min-height: 70px;
-  padding: 3px 12px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 26px 10px;
 
   color: #000;
 
