@@ -51,22 +51,20 @@ const Todo = ({ text, id, isCompleted, setTodos, className }) => {
           })}
         >
           <p>{text}</p>
-          <div>
+          <div className={classes.btn_wrapper}>
+            <Button className={classes.btn_handlers} onClick={editTodoHandler}>
+              Edit Task
+            </Button>
             <Button
               className={classes.btn_handlers}
               onClick={completeTodoHandler}
-            >
-              Complete
-            </Button>
+              check
+            />
             <Button
               className={classes.btn_handlers}
               onClick={deleteTodoHandler}
-            >
-              Delete
-            </Button>
-            <Button className={classes.btn_handlers} onClick={editTodoHandler}>
-              Edit
-            </Button>
+              remove
+            />
           </div>
         </div>
       )}
