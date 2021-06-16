@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import classNames from 'classnames';
 import { bool, func, string } from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import Button from 'components/UI/Button/Button';
 import Loader from 'components/UI/Loader/Loader';
@@ -58,13 +60,17 @@ const Todo = ({ text, id, isCompleted, setTodos, className }) => {
             <Button
               className={classes.btn_handlers}
               onClick={completeTodoHandler}
-              check
-            />
+              rounded
+            >
+              <FontAwesomeIcon icon={faCheck} />
+            </Button>
             <Button
               className={classes.btn_handlers}
               onClick={deleteTodoHandler}
-              remove
-            />
+              rounded
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </Button>
           </div>
         </div>
       )}

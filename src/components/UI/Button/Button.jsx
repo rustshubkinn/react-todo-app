@@ -5,14 +5,13 @@ import { bool, func, string } from 'prop-types';
 
 import classes from './Button.module.scss';
 
-const Button = ({ children, type, onClick, className, remove, check }) => (
+const Button = ({ children, type, onClick, className, rounded }) => (
   <button
     type={type}
     onClick={onClick}
     className={classNames({
       [classes.btn]: true,
-      [classes.remove]: remove,
-      [classes.check]: check,
+      [classes.rounded]: rounded,
       [className]: className,
     })}
   >
@@ -25,16 +24,14 @@ Button.propTypes = {
   type: string,
   onClick: func.isRequired,
   className: string,
-  remove: bool,
-  check: bool,
+  rounded: bool,
 };
 
 Button.defaultProps = {
   children: null,
   type: 'button',
   className: null,
-  remove: null,
-  check: null,
+  rounded: null,
 };
 
 export default Button;

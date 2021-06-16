@@ -15,40 +15,14 @@
   }
 }
 
-.remove {
-  padding: 2px 6px;
+.rounded {
+  padding: 8px 10px;
 
-  background-color: rgb(212, 23, 23);
-  border-radius: 50%;
-  box-shadow: none;
-  &::after {
-    display: inline-block;
-
-    font-size: 45px;
-    line-height: 25px;
-
-    content: '\00d7'; /* This will render the 'X' */
-  }
-
-  &:hover {
-    background: rgb(172, 25, 25);
-  }
-}
-
-.check {
-  padding: 2px 0;
+  font-size: 18px;
 
   background-color: #2480aa;
   border-radius: 50%;
   box-shadow: none;
-  &::after {
-    display: inline-block;
-
-    font-size: 40px;
-    line-height: 25px;
-
-    content: '\2713'; /* This will render the 'X' */
-  }
 
   &:hover {
     background: #2ea7df;
