@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { bool, func, string } from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 import Button from 'components/UI/Button/Button';
 import Loader from 'components/UI/Loader/Loader';
@@ -54,6 +55,9 @@ const Todo = ({ text, id, isCompleted, setTodos, className }) => {
         >
           <p>{text}</p>
           <div className={classes.btn_wrapper}>
+            <Button>
+              <Link to={`/todo/${id}/${text}`}>Open</Link>
+            </Button>
             <Button className={classes.btn_handlers} onClick={editTodoHandler}>
               Edit Task
             </Button>
