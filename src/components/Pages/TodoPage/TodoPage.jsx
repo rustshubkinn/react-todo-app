@@ -1,5 +1,6 @@
-import Button from 'components/UI/Button/Button';
 import { useParams, Link } from 'react-router-dom';
+
+import Button from 'components/UI/Button/Button';
 
 import classes from './TodoPage.module.scss';
 
