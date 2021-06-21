@@ -22,7 +22,7 @@ const Button = ({ children, type, onClick, className, rounded }) => (
 Button.propTypes = {
   children: string,
   type: string,
-  onClick: func.isRequired,
+  onClick: func,
   className: string,
   rounded: bool,
 };
@@ -30,6 +30,7 @@ Button.propTypes = {
 Button.defaultProps = {
   children: null,
   type: 'button',
+  onClick: null,
   className: null,
   rounded: null,
 };
