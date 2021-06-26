@@ -56,7 +56,14 @@ const Todo = ({ text, id, isCompleted, setTodos, className }) => {
           <p>{text}</p>
           <div className={classes.btn_wrapper}>
             <Button>
-              <Link to={`/todo/${id}/${text}`}>Open</Link>
+              <Link
+                to={{
+                  pathname: `/${id}/`,
+                  state: { id, text, isCompleted },
+                }}
+              >
+                Open
+              </Link>
             </Button>
             <Button className={classes.btn_handlers} onClick={editTodoHandler}>
               Edit Task
