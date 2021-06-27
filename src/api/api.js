@@ -51,3 +51,10 @@ export const editTodo = async (id, newTodo) => {
 
   await fetch(`${URL}/${id}.json`, options);
 };
+
+export const fetchTodoById = async (id) => {
+  const response = await fetch(`${URL}/${id}.json`);
+  const result = await response.json();
+
+  return result;
+};

@@ -59,7 +59,7 @@ const Todo = ({ text, id, isCompleted, setTodos, className }) => {
               <Link
                 to={{
                   pathname: `/todos/${id}`,
-                  state: { id, text, isCompleted },
+                  state: { id },
                 }}
               >
                 Open
