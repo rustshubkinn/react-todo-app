@@ -10,25 +10,25 @@ import { fetchTodo } from 'api/api';
 
 import classes from './Home.module.scss';
 
+const MOCK_OPTIONS = [
+  {
+    value: '',
+    name: 'All Todos',
+  },
+  {
+    value: '0',
+    name: 'Undone Todos',
+  },
+  {
+    value: '1',
+    name: 'Done Todos',
+  },
+];
+
 const Home = () => {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState('');
-
-  const MOCK_OPTIONS = [
-    {
-      value: '',
-      name: 'All Todos',
-    },
-    {
-      value: '0',
-      name: 'Undone Todos',
-    },
-    {
-      value: '1',
-      name: 'Done Todos',
-    },
-  ];
 
   const fetchData = async () => {
     setLoading(true);
@@ -41,9 +41,7 @@ const Home = () => {
     fetchData();
   }, []);
 
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  };
+  const handleChange = (e) => setValue(e.target.value);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
