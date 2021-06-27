@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { func } from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,7 +12,7 @@ import { completeTodo, deleteTodo, fetchTodo } from 'api/api';
 
 import classes from './TodoPage.module.scss';
 
-const TodoPage = () => {
+const TodoPage = ({ setTodos }) => {
   const location = useLocation();
   const { id, text, isCompleted } = location.state;
   const [loading, setLoading] = useState(false);
@@ -35,7 +36,8 @@ const TodoPage = () => {
   const deleteTodoHandler = async () => {
     setLoading(true);
     await deleteTodo(id);
-    await todo();
+    const newTodos = await fetchTodo();
+    setTodos(newTodos);
     setLoading(false);
   };
 
@@ -68,7 +70,7 @@ const TodoPage = () => {
               onClick={completeTodoHandler}
               rounded
             >
-              <Link to="/">
+              <Link to="/" onClick={fetchTodo}>
                 <FontAwesomeIcon icon={faCheck} />
               </Link>
             </Button>
@@ -86,6 +88,10 @@ const TodoPage = () => {
       )}
     </div>
   );
+};
+
+TodoPage.propTypes = {
+  setTodos: func.isRequired,
 };
 
 export default TodoPage;
