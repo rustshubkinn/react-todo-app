@@ -18,7 +18,7 @@ const TodoPage = ({ setTodos }) => {
   const [loading, setLoading] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
-  const todo = async () => {
+  const fetchCurrentTodo = async () => {
     setLoading(true);
     const todoList = await fetchTodo();
     const exactTodo = todoList.find((currentTodo) => currentTodo.id === id);
@@ -29,7 +29,7 @@ const TodoPage = ({ setTodos }) => {
   const completeTodoHandler = async () => {
     setLoading(true);
     await completeTodo(id, isCompleted);
-    await todo();
+    await fetchCurrentTodo();
     setLoading(false);
   };
 
@@ -51,7 +51,7 @@ const TodoPage = ({ setTodos }) => {
         <TodoForm
           id={id}
           todoText={text}
-          setTodos={todo}
+          setTodos={fetchCurrentTodo}
           setEditMode={setEditMode}
         />
       ) : (
