@@ -1,6 +1,8 @@
-import classNames from 'classnames';
 import { bool, element, func, string } from 'prop-types';
+import classNames from 'classnames';
+
 import Button from '../Button/Button';
+
 import classes from './FilterBlock.module.scss';
 
 const FilterBlock = ({ children, onSubmit, className, block }) => {
