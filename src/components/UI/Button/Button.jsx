@@ -1,7 +1,7 @@
 /* eslint-disable react/button-has-type */
 
 import classNames from 'classnames';
-import { bool, func, string } from 'prop-types';
+import { bool, element, func, oneOfType, string } from 'prop-types';
 
 import classes from './Button.module.scss';
 
@@ -20,7 +20,7 @@ const Button = ({ children, type, onClick, className, rounded }) => (
 );
 
 Button.propTypes = {
-  children: string,
+  children: oneOfType([string, element]),
   type: string,
   onClick: func,
   className: string,
