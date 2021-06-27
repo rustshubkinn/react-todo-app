@@ -58,7 +58,7 @@ const Todo = ({ text, id, isCompleted, setTodos, className }) => {
             <Button>
               <Link
                 to={{
-                  pathname: `/${id}/`,
+                  pathname: `/todos/${id}`,
                   state: { id, text, isCompleted },
                 }}
               >

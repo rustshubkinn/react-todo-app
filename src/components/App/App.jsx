@@ -8,7 +8,7 @@ import './global.scss';
 const App = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route path="/:id/" component={TodoPage} />
+    <Route path="/todos/:id" component={TodoPage} />
   </Switch>
 );
 
