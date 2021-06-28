@@ -9,10 +9,7 @@ const Input = ({ onChange, type, placeholder, className, value }) => (
     type={type}
     placeholder={placeholder}
     onChange={onChange}
-    className={classNames({
-      [classes.input]: true,
-      [className]: className,
-    })}
+    className={classNames(classes.input, className)}
   />
 );
 

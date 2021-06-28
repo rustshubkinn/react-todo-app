@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import { arrayOf, bool, func, shape, string } from 'prop-types';
+import { arrayOf, func, shape, string } from 'prop-types';
 
 import classes from './Select.module.scss';
 
-const Select = ({ options, name, id, className, filter, onChange }) => {
+const Select = ({ options, name, id, className, onChange }) => {
   const renderOptions = () =>
     options.map((option) => (
       <option key={option.value} value={option.value}>
@@ -13,10 +13,7 @@ const Select = ({ options, name, id, className, filter, onChange }) => {
 
   return (
     <select
-      className={classNames({
-        [classes.filter_select]: filter,
-        [className]: className,
-      })}
+      className={classNames(classes.filter_select, className)}
       name={name}
       id={id}
       onChange={onChange}
@@ -31,13 +28,11 @@ Select.propTypes = {
   id: string.isRequired,
   name: string.isRequired,
   className: string,
-  filter: bool,
   onChange: func.isRequired,
 };
 
 Select.defaultProps = {
   className: null,
-  filter: false,
 };
 
 export default Select;

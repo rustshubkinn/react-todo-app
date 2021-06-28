@@ -9,10 +9,8 @@ const Button = ({ children, type, onClick, className, rounded }) => (
   <button
     type={type}
     onClick={onClick}
-    className={classNames({
-      [classes.btn]: true,
+    className={classNames(classes.btn, className, {
       [classes.rounded]: rounded,
-      [className]: className,
     })}
   >
     {children}

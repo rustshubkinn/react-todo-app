@@ -8,11 +8,7 @@ const Loader = ({ loading }) => {
     return <></>;
   }
   return (
-    <div
-      className={classNames({
-        [classes.backdrop]: true,
-      })}
-    >
+    <div className={classNames(classes.backdrop)}>
       <div className={classes.ldsroller}>
         <div />
         <div />
