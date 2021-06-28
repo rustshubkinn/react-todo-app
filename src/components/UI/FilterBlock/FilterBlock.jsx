@@ -1,4 +1,4 @@
-import { element, func, string } from 'prop-types';
+import { arrayOf, element, func, oneOfType, string } from 'prop-types';
 import classNames from 'classnames';
 
 import Button from '../Button/Button';
@@ -11,7 +11,7 @@ const FilterBlock = ({ children, onSubmit, className }) => {
       return <li>{children}</li>;
     }
 
-    return children.map((filter) => <li>{filter}</li>);
+    return children.map((filter) => <li key={Math.random()}>{filter}</li>);
   };
 
   return (
@@ -25,7 +25,7 @@ const FilterBlock = ({ children, onSubmit, className }) => {
 };
 
 FilterBlock.propTypes = {
-  children: element.isRequired,
+  children: oneOfType([arrayOf(element), element]).isRequired,
   onSubmit: func.isRequired,
   className: string,
 };
