@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import classNames from 'classnames';
 import { bool, func, string } from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 import Button from 'components/UI/Button/Button';
 import Loader from 'components/UI/Loader/Loader';
@@ -65,8 +65,12 @@ const Todo = ({ text, id, isCompleted, setTodos, className }) => {
                 Open
               </Link>
             </Button>
-            <Button className={classes.btn_handlers} onClick={editTodoHandler}>
-              Edit Task
+            <Button
+              className={classes.btn_handlers}
+              onClick={editTodoHandler}
+              rounded
+            >
+              <FontAwesomeIcon icon={faEdit} />
             </Button>
             <Button
               className={classes.btn_handlers}

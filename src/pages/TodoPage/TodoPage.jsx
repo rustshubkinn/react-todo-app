@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import Button from 'components/UI/Button/Button';
 import Loader from 'components/UI/Loader/Loader';
@@ -66,8 +66,12 @@ const TodoPage = () => {
             <Button>
               <Link to="/">Back</Link>
             </Button>
-            <Button className={classes.btn_handlers} onClick={editTodoHandler}>
-              Edit Task
+            <Button
+              className={classes.btn_handlers}
+              onClick={editTodoHandler}
+              rounded
+            >
+              <FontAwesomeIcon icon={faEdit} />
             </Button>
             <Button
               className={classes.btn_handlers}
