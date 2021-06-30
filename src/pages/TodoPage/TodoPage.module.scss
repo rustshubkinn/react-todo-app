@@ -40,3 +40,26 @@
 .btn_handlers {
   margin-left: 8px;
 }
+
+.btn_submit {
+  position: relative;
+
+  bottom: 73px;
+  left: 520px;
+}
+
+.task_input {
+  max-width: 600px;
+  margin-bottom: 15px;
+  padding-right: 90px;
+
+  box-shadow: 0 5px 10px 2px rgba(36, 128, 170, 0.8);
+}
+
+.task_textarea {
+  margin-bottom: 20px;
+
+  font-family: inherit;
+
+  box-shadow: 0 5px 10px 2px rgba(36, 128, 170, 0.8);
+}

@@ -10,9 +10,10 @@ import {
 
 import Button from 'components/UI/Button/Button';
 import Loader from 'components/UI/Loader/Loader';
-import TodoForm from 'components/TodoForm/TodoForm';
+import Input from 'components/UI/Input/Input';
+import Textarea from 'components/UI/Textarea/Textarea';
 
-import { completeTodo, deleteTodo, fetchTodoById } from 'api/api';
+import { completeTodo, deleteTodo, editTodo, fetchTodoById } from 'api/api';
 
 import classes from './TodoPage.module.scss';
 
@@ -23,12 +24,16 @@ const TodoPage = () => {
   const [loading, setLoading] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [currentTodo, setCurrentTodo] = useState({});
+  const [value, setValue] = useState(currentTodo.text);
+  const [body, setBody] = useState(currentTodo.body);
 
   const fetchCurrentTodo = useCallback(async () => {
     setLoading(true);
     const newTodo = await fetchTodoById(id);
     setCurrentTodo(newTodo);
     setLoading(false);
+    setValue(newTodo.text);
+    setBody(newTodo.body);
     return newTodo;
   }, [id]);
 
@@ -50,19 +55,50 @@ const TodoPage = () => {
     history.push('/');
   };
 
+  const submitNewTodo = async (e) => {
+    e.preventDefault();
+    if (!value) {
+      return;
+    }
+
+    setLoading(true);
+
+    const newTodo = {
+      text: value,
+      body,
+    };
+
+    await editTodo(id, newTodo);
+    await fetchCurrentTodo();
+    setLoading(false);
+    if (setEditMode) {
+      setEditMode(false);
+    }
+  };
+
   const editTodoHandler = () => setEditMode(!editMode);
 
   return (
     <div className={classes.todopage}>
       <Loader loading={loading} />
-
       {editMode ? (
-        <TodoForm
-          id={id}
-          todoText={currentTodo.text}
-          setTodos={fetchCurrentTodo}
-          setEditMode={setEditMode}
-        />
+        <form onSubmit={submitNewTodo}>
+          <Input
+            onChange={(e) => setValue(e.target.value)}
+            value={value}
+            placeholder="Enter task here!"
+            className={classes.task_input}
+          />
+          <Button type="submit" className={classes.btn_submit}>
+            Edit Task
+          </Button>
+          <Textarea
+            onChange={(e) => setBody(e.target.value)}
+            value={body}
+            placeholder="Enter description here!"
+            className={classes.task_textarea}
+          />
+        </form>
       ) : (
         <div>
           <div className={classes.task_wrapper}>
@@ -76,31 +112,31 @@ const TodoPage = () => {
           <div className={classes.task_body}>
             <p>{currentTodo.body}</p>
           </div>
-          <div className={classes.button_wrapper}>
-            <Button
-              className={classes.btn_handlers}
-              onClick={completeTodoHandler}
-              rounded
-            >
-              <FontAwesomeIcon icon={faCheck} />
-            </Button>
-            <Button
-              className={classes.btn_handlers}
-              onClick={deleteTodoHandler}
-              rounded
-            >
-              <FontAwesomeIcon icon={faTrash} />
-            </Button>
-            <Button
-              className={classes.btn_handlers}
-              onClick={editTodoHandler}
-              rounded
-            >
-              <FontAwesomeIcon icon={faEdit} />
-            </Button>
-          </div>
         </div>
       )}
+      <div className={classes.button_wrapper}>
+        <Button
+          className={classes.btn_handlers}
+          onClick={completeTodoHandler}
+          rounded
+        >
+          <FontAwesomeIcon icon={faCheck} />
+        </Button>
+        <Button
+          className={classes.btn_handlers}
+          onClick={deleteTodoHandler}
+          rounded
+        >
+          <FontAwesomeIcon icon={faTrash} />
+        </Button>
+        <Button
+          className={classes.btn_handlers}
+          onClick={editTodoHandler}
+          rounded
+        >
+          <FontAwesomeIcon icon={faEdit} />
+        </Button>
+      </div>
     </div>
   );
 };
