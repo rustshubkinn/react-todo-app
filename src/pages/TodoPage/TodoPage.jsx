@@ -24,8 +24,8 @@ const TodoPage = () => {
   const [loading, setLoading] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [currentTodo, setCurrentTodo] = useState({});
-  const [value, setValue] = useState(currentTodo.text);
-  const [body, setBody] = useState(currentTodo.body);
+  const [value, setValue] = useState('');
+  const [body, setBody] = useState('');
 
   const fetchCurrentTodo = useCallback(async () => {
     setLoading(true);
