@@ -25,6 +25,7 @@ const TodoForm = ({ id, todoText, setTodos, setEditMode }) => {
     const newTodo = {
       isCompleted: false,
       text: value,
+      body: 'Enter description by click on Edit Button',
     };
 
     if (id) {
