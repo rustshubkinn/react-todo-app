@@ -49,6 +49,7 @@ const TodoForm = ({ id, todoText, setTodos, setEditMode }) => {
       <Input
         onChange={(e) => setValue(e.target.value)}
         value={value}
+        name="todo_input"
         placeholder="Enter task here!"
         className={classes.main_input}
       />

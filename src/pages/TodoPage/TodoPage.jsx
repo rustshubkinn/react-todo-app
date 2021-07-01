@@ -86,6 +86,7 @@ const TodoPage = () => {
           <Input
             onChange={(e) => setValue(e.target.value)}
             value={value}
+            name="todo_input"
             placeholder="Enter task here!"
             className={classes.task_input}
           />
@@ -95,6 +96,7 @@ const TodoPage = () => {
           <Textarea
             onChange={(e) => setBody(e.target.value)}
             value={body}
+            name="body_edit"
             placeholder="Enter description here!"
             className={classes.task_textarea}
           />
