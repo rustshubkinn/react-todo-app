@@ -71,14 +71,14 @@ const Home = () => {
       <FilterBlock
         block
         className={classes.filter_block}
-        onSubmit={(e) => onSubmitHandler(e)}
+        onSubmit={onSubmitHandler}
       >
         <Select
           name="select_filter"
           id="select_filter"
           options={MOCK_OPTIONS}
           className={classes.select_filter}
-          onChange={(e) => handleChange(e)}
+          onChange={handleChange}
           value={value}
           filter
         />
