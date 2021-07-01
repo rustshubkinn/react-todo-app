@@ -3,10 +3,11 @@ import classNames from 'classnames';
 
 import classes from './Input.module.scss';
 
-const Input = ({ onChange, type, placeholder, className, value }) => (
+const Input = ({ name, onChange, type, placeholder, className, value }) => (
   <input
     value={value}
     type={type}
+    name={name}
     placeholder={placeholder}
     onChange={onChange}
     className={classNames(classes.input, className)}
@@ -18,6 +19,7 @@ Input.propTypes = {
   type: string,
   placeholder: string.isRequired,
   value: string,
+  name: string.isRequired,
   className: string,
 };
 

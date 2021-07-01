@@ -3,10 +3,11 @@ import classNames from 'classnames';
 
 import classes from './Textarea.module.scss';
 
-const Textarea = ({ onChange, type, placeholder, className, value }) => (
+const Textarea = ({ name, onChange, type, placeholder, className, value }) => (
   <textarea
     value={value}
     type={type}
+    name={name}
     placeholder={placeholder}
     onChange={onChange}
     className={classNames(classes.input, className)}
@@ -18,6 +19,7 @@ Textarea.propTypes = {
   type: string,
   placeholder: string.isRequired,
   value: string,
+  name: string.isRequired,
   className: string,
 };
 
