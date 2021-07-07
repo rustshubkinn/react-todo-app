@@ -31,9 +31,14 @@ const TodoPage = () => {
     setLoading(true);
     const newTodo = await fetchTodoById(id);
     setCurrentTodo(newTodo);
+    if (newTodo.body === '') {
+      setValue(newTodo.text);
+      setEditMode(true);
+    } else {
+      setValue(newTodo.text);
+      setBody(newTodo.body);
+    }
     setLoading(false);
-    setValue(newTodo.text);
-    setBody(newTodo.body);
     return newTodo;
   }, [id]);
 
@@ -83,13 +88,20 @@ const TodoPage = () => {
       <Loader loading={loading} />
       {editMode ? (
         <form onSubmit={submitNewTodo}>
-          <Input
-            onChange={(e) => setValue(e.target.value)}
-            value={value}
-            name="todo_input"
-            placeholder="Enter task here!"
-            className={classes.task_input}
-          />
+          <div className={classes.task_wrapper}>
+            <Input
+              onChange={(e) => setValue(e.target.value)}
+              value={value}
+              name="todo_input"
+              placeholder="Enter task here!"
+              className={classes.task_input}
+            />
+            <Button className={classes.btn_handlers} rounded>
+              <Link to="/">
+                <FontAwesomeIcon icon={faArrowLeft} />
+              </Link>
+            </Button>
+          </div>
           <Button type="submit" className={classes.btn_submit}>
             Edit Task
           </Button>
@@ -111,34 +123,39 @@ const TodoPage = () => {
               </Link>
             </Button>
           </div>
-          <div className={classes.task_body}>
+          <div
+            className={classes.task_body}
+            onClick={editTodoHandler}
+            onKeyDown={editTodoHandler}
+            role="presentation"
+          >
             <p>{currentTodo.body}</p>
+          </div>
+          <div className={classes.button_wrapper}>
+            <Button
+              className={classes.btn_handlers}
+              onClick={completeTodoHandler}
+              rounded
+            >
+              <FontAwesomeIcon icon={faCheck} />
+            </Button>
+            <Button
+              className={classes.btn_handlers}
+              onClick={deleteTodoHandler}
+              rounded
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </Button>
+            <Button
+              className={classes.btn_handlers}
+              onClick={editTodoHandler}
+              rounded
+            >
+              <FontAwesomeIcon icon={faEdit} />
+            </Button>
           </div>
         </div>
       )}
-      <div className={classes.button_wrapper}>
-        <Button
-          className={classes.btn_handlers}
-          onClick={completeTodoHandler}
-          rounded
-        >
-          <FontAwesomeIcon icon={faCheck} />
-        </Button>
-        <Button
-          className={classes.btn_handlers}
-          onClick={deleteTodoHandler}
-          rounded
-        >
-          <FontAwesomeIcon icon={faTrash} />
-        </Button>
-        <Button
-          className={classes.btn_handlers}
-          onClick={editTodoHandler}
-          rounded
-        >
-          <FontAwesomeIcon icon={faEdit} />
-        </Button>
-      </div>
     </div>
   );
 };
