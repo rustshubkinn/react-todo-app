@@ -25,7 +25,7 @@ const TodoForm = ({ id, todoText, setTodos, setEditMode }) => {
     const newTodo = {
       isCompleted: false,
       text: value,
-      body: 'Enter description by click on Edit Button',
+      body: '',
     };
 
     if (id) {
@@ -43,11 +43,15 @@ const TodoForm = ({ id, todoText, setTodos, setEditMode }) => {
     }
   };
 
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+
   return (
     <form className={classes.form} onSubmit={handleSubmit}>
       <Loader loading={loading} />
       <Input
-        onChange={(e) => setValue(e.target.value)}
+        onChange={handleChange}
         value={value}
         name="todo_input"
         placeholder="Enter task here!"
