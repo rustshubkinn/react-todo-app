@@ -1,1 +1,7 @@
 # React ToDo App
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a308ed6c-8451-4a8b-8167-69c814fa0684/deploy-status)](https://app.netlify.com/sites/wizardly-franklin-ae9037/deploys)
+
+# Links
+
+- [Live Project](https://wizardly-franklin-ae9037.netlify.app/)
