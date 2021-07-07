@@ -43,9 +43,7 @@ const TodoForm = ({ id, todoText, setTodos, setEditMode }) => {
     }
   };
 
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  };
+  const handleChange = (e) => setValue(e.target.value);
 
   return (
     <form className={classes.form} onSubmit={handleSubmit}>
