@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowLeft,
   faCheck,
-  faEdit,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -22,22 +21,14 @@ const TodoPage = () => {
   const { id } = location.state;
   const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [editMode, setEditMode] = useState(false);
   const [currentTodo, setCurrentTodo] = useState({});
-  const [value, setValue] = useState('');
-  const [body, setBody] = useState('');
+  const [formValues, setFormValues] = useState({ text: '', body: '' });
 
   const fetchCurrentTodo = useCallback(async () => {
     setLoading(true);
     const newTodo = await fetchTodoById(id);
     setCurrentTodo(newTodo);
-    if (newTodo.body === '') {
-      setValue(newTodo.text);
-      setEditMode(true);
-    } else {
-      setValue(newTodo.text);
-      setBody(newTodo.body);
-    }
+    setFormValues(newTodo);
     setLoading(false);
     return newTodo;
   }, [id]);
@@ -61,102 +52,70 @@ const TodoPage = () => {
   };
 
   const submitNewTodo = async (e) => {
-    e.preventDefault();
-    if (!value) {
+    if (e.shiftKey === true || e.keyCode !== 13) {
       return;
     }
 
-    setLoading(true);
+    if (e.key === 'Enter') {
+      e.preventDefault();
 
-    const newTodo = {
-      text: value,
-      body,
-    };
+      setLoading(true);
 
-    await editTodo(id, newTodo);
-    await fetchCurrentTodo();
-    setLoading(false);
-    if (setEditMode) {
-      setEditMode(false);
+      const newTodo = { text: formValues.text, body: formValues.body };
+
+      await editTodo(id, newTodo);
+      await fetchCurrentTodo();
+      setLoading(false);
     }
   };
 
-  const editTodoHandler = () => setEditMode(!editMode);
+  const changeHandler = ({ target }) =>
+    setFormValues((prevState) => ({
+      ...prevState,
+      [target.name]: target.value,
+    }));
 
   return (
-    <div className={classes.todopage}>
+    <section className={classes.todo}>
       <Loader loading={loading} />
-      {editMode ? (
-        <form onSubmit={submitNewTodo}>
-          <div className={classes.task_wrapper}>
-            <Input
-              onChange={(e) => setValue(e.target.value)}
-              value={value}
-              name="todo_input"
-              placeholder="Enter task here!"
-              className={classes.task_input}
-            />
-            <Button className={classes.btn_handlers} rounded>
-              <Link to="/">
-                <FontAwesomeIcon icon={faArrowLeft} />
-              </Link>
-            </Button>
-          </div>
-          <Button type="submit" className={classes.btn_submit}>
-            Edit Task
-          </Button>
-          <Textarea
-            onChange={(e) => setBody(e.target.value)}
-            value={body}
-            name="body_edit"
-            placeholder="Enter description here!"
-            className={classes.task_textarea}
+      <form
+        onSubmit={submitNewTodo}
+        onKeyDown={submitNewTodo}
+        role="presentation"
+      >
+        <header className={classes.todo_header}>
+          <Input
+            onChange={changeHandler}
+            value={formValues.text}
+            name="text"
+            placeholder="Enter task here!"
           />
-        </form>
-      ) : (
-        <div>
-          <div className={classes.task_wrapper}>
-            <h2>{currentTodo.text}</h2>
-            <Button className={classes.btn_handlers} rounded>
-              <Link to="/">
-                <FontAwesomeIcon icon={faArrowLeft} />
-              </Link>
-            </Button>
-          </div>
-          <div
-            className={classes.task_body}
-            onClick={editTodoHandler}
-            onKeyDown={editTodoHandler}
-            role="presentation"
+          <Button rounded>
+            <Link to="/">
+              <FontAwesomeIcon icon={faArrowLeft} />
+            </Link>
+          </Button>
+        </header>
+        <Textarea
+          onChange={changeHandler}
+          value={formValues.body}
+          name="body"
+          placeholder="Enter description here!"
+        />
+        <footer className={classes.todo_footer}>
+          <Button onClick={completeTodoHandler} rounded>
+            <FontAwesomeIcon icon={faCheck} />
+          </Button>
+          <Button
+            className={classes.btn_delete}
+            onClick={deleteTodoHandler}
+            rounded
           >
-            <p>{currentTodo.body}</p>
-          </div>
-          <div className={classes.button_wrapper}>
-            <Button
-              className={classes.btn_handlers}
-              onClick={completeTodoHandler}
-              rounded
-            >
-              <FontAwesomeIcon icon={faCheck} />
-            </Button>
-            <Button
-              className={classes.btn_handlers}
-              onClick={deleteTodoHandler}
-              rounded
-            >
-              <FontAwesomeIcon icon={faTrash} />
-            </Button>
-            <Button
-              className={classes.btn_handlers}
-              onClick={editTodoHandler}
-              rounded
-            >
-              <FontAwesomeIcon icon={faEdit} />
-            </Button>
-          </div>
-        </div>
-      )}
-    </div>
+            <FontAwesomeIcon icon={faTrash} />
+          </Button>
+        </footer>
+      </form>
+    </section>
   );
 };
 
