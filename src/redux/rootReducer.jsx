@@ -1,11 +1,2 @@
-const rootReducer = (state, action) => {
-  switch (action.type) {
-    case 'FETCH_TODOS':
-      return {
-        todos: [],
-        loading: true,
-      };
-  }
-};
-
+const rootReducer = () => {};
 export default rootReducer;
