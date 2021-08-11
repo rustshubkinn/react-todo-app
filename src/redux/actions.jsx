@@ -1,4 +1,10 @@
-import { fetchTodo, postTodo, completeTodo, deleteTodo } from 'api/api';
+import {
+  fetchTodo,
+  postTodo,
+  completeTodo,
+  deleteTodo,
+  editTodo,
+} from 'api/api';
 
 export const fetchTodos = () => async (dispatch) => {
   dispatch({
@@ -61,6 +67,10 @@ export const filterTodos = (value) => async (dispatch) => {
 };
 
 export const addTodo = (value) => async (dispatch) => {
+  if (!value) {
+    return;
+  }
+
   const newTodo = {
     isCompleted: false,
     text: value,
@@ -73,18 +83,6 @@ export const addTodo = (value) => async (dispatch) => {
       loading: true,
     },
   });
-
-  if (!value) {
-    const result = await fetchTodo();
-    dispatch({
-      type: 'ADD_TODO_SUCCESS',
-      payload: {
-        loading: false,
-        todos: result,
-      },
-    });
-    return;
-  }
 
   await postTodo(newTodo);
   const result = await fetchTodo();
@@ -131,6 +129,32 @@ export const deleteTodoById = (id) => async (dispatch) => {
 
   dispatch({
     type: 'DELETE_TODO_SUCCESS',
+    payload: {
+      loading: false,
+      todos: result,
+    },
+  });
+};
+
+export const editTodoById = (id, text) => async (dispatch) => {
+  if (!text) {
+    return;
+  }
+
+  dispatch({
+    type: 'EDIT_TODO_REQUEST',
+    payload: {
+      loading: true,
+    },
+  });
+
+  const newTodo = { text };
+
+  await editTodo(id, newTodo);
+  const result = await fetchTodo();
+
+  dispatch({
+    type: 'EDIT_TODO_SUCCESS',
     payload: {
       loading: false,
       todos: result,

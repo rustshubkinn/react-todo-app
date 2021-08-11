@@ -1,30 +1,28 @@
 import { useState } from 'react';
-import { bool, func, string } from 'prop-types';
+import { bool, string } from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { completeTodoById, deleteTodoById } from 'redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Button from 'components/UI/Button/Button';
 import Loader from 'components/UI/Loader/Loader';
 import TodoForm from 'components/TodoForm/TodoForm';
 
+import { completeTodoById, deleteTodoById } from 'redux/actions';
+
 import classes from './Todo.module.scss';
 
-const Todo = ({ text, id, isCompleted, setTodos, className }) => {
+const Todo = ({ text, id, isCompleted, className }) => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state);
   const [editMode, setEditMode] = useState(false);
 
-  const completeTodoHandler = async () => {
+  const completeTodoHandler = async () =>
     dispatch(completeTodoById(id, isCompleted));
-  };
 
-  const deleteTodoHandler = async () => {
-    dispatch(deleteTodoById(id));
-  };
+  const deleteTodoHandler = async () => dispatch(deleteTodoById(id));
 
   const editTodoHandler = () => setEditMode(!editMode);
 
@@ -32,12 +30,7 @@ const Todo = ({ text, id, isCompleted, setTodos, className }) => {
     <div>
       <Loader loading={loading} />
       {editMode ? (
-        <TodoForm
-          id={id}
-          todoText={text}
-          setTodos={setTodos}
-          setEditMode={setEditMode}
-        />
+        <TodoForm id={id} todoText={text} setEditMode={setEditMode} />
       ) : (
         <div
           className={classNames({
@@ -90,7 +83,6 @@ Todo.propTypes = {
   text: string.isRequired,
   isCompleted: bool.isRequired,
   id: string.isRequired,
-  setTodos: func.isRequired,
   className: string,
 };
 
