@@ -1,46 +1,23 @@
 import { useState } from 'react';
-import { func, string } from 'prop-types';
+import { string } from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { addTodo } from 'redux/actions';
 
 import Button from 'components/UI/Button/Button';
 import Input from 'components/UI/Input/Input';
 import Loader from 'components/UI/Loader/Loader';
 
-import { postTodo, fetchTodo, editTodo } from 'api/api';
-
 import classes from './TodoForm.module.scss';
 
-const TodoForm = ({ id, todoText, setTodos, setEditMode }) => {
+const TodoForm = ({ id, todoText }) => {
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state);
   const [value, setValue] = useState(todoText);
-  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!value) {
-      return;
-    }
-
-    setLoading(true);
-
-    const newTodo = {
-      isCompleted: false,
-      text: value,
-      body: '',
-    };
-
-    if (id) {
-      await editTodo(id, newTodo);
-    } else {
-      await postTodo(newTodo);
-    }
-
-    const todos = await fetchTodo();
-    setTodos(todos);
-    setValue('');
-    setLoading(false);
-    if (setEditMode) {
-      setEditMode(false);
-    }
+    dispatch(addTodo(value));
   };
 
   const handleChange = (e) => setValue(e.target.value);
@@ -63,16 +40,13 @@ const TodoForm = ({ id, todoText, setTodos, setEditMode }) => {
 };
 
 TodoForm.propTypes = {
-  setTodos: func.isRequired,
   id: string,
   todoText: string,
-  setEditMode: func,
 };
 
 TodoForm.defaultProps = {
   id: '',
   todoText: '',
-  setEditMode: null,
 };
 
 export default TodoForm;

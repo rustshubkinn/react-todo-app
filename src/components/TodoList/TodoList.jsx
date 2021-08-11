@@ -4,6 +4,9 @@ import Todo from 'components/Todo/Todo';
 import classes from './TodoList.module.scss';
 
 const TodoList = ({ todos, setTodos }) => {
+  if (!todos) {
+    return <></>;
+  }
   const renderTodos = () =>
     todos.map((todo) => (
       <Todo
