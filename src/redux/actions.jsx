@@ -1,4 +1,4 @@
-import { fetchTodo, postTodo, completeTodo } from 'api/api';
+import { fetchTodo, postTodo, completeTodo, deleteTodo } from 'api/api';
 
 export const fetchTodos = () => async (dispatch) => {
   dispatch({
@@ -111,6 +111,26 @@ export const completeTodoById = (id, isCompleted) => async (dispatch) => {
 
   dispatch({
     type: 'COMPLETE_TODO_SUCCESS',
+    payload: {
+      loading: false,
+      todos: result,
+    },
+  });
+};
+
+export const deleteTodoById = (id) => async (dispatch) => {
+  dispatch({
+    type: 'DELETE_TODO_REQUEST',
+    payload: {
+      loading: true,
+    },
+  });
+
+  await deleteTodo(id);
+  const result = await fetchTodo();
+
+  dispatch({
+    type: 'DELETE_TODO_SUCCESS',
     payload: {
       loading: false,
       todos: result,
