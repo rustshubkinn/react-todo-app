@@ -1,12 +1,13 @@
-import { arrayOf, func, shape } from 'prop-types';
+import { arrayOf, shape } from 'prop-types';
 
 import Todo from 'components/Todo/Todo';
 import classes from './TodoList.module.scss';
 
-const TodoList = ({ todos, setTodos }) => {
+const TodoList = ({ todos }) => {
   if (!todos) {
     return <></>;
   }
+
   const renderTodos = () =>
     todos.map((todo) => (
       <Todo
@@ -14,7 +15,6 @@ const TodoList = ({ todos, setTodos }) => {
         text={todo.text}
         id={todo.id}
         isCompleted={todo.isCompleted}
-        setTodos={setTodos}
         className={classes.todo}
       />
     ));
@@ -24,7 +24,6 @@ const TodoList = ({ todos, setTodos }) => {
 
 TodoList.propTypes = {
   todos: arrayOf(shape({})).isRequired,
-  setTodos: func.isRequired,
 };
 
 export default TodoList;

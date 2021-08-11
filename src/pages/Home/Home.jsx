@@ -61,8 +61,8 @@ const Home = () => {
         />
       </FilterBlock>
       <div className={classes.todo_list_wrapper}>
-        <TodoForm setTodos={() => {}} />
-        <TodoList todos={todos} setTodos={() => {}} />
+        <TodoForm />
+        <TodoList todos={todos} />
       </div>
     </div>
   );
