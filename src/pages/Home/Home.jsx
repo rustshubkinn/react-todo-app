@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Loader from 'components/UI/Loader/Loader';
 import TodoForm from 'components/TodoForm/TodoForm';
@@ -6,7 +7,7 @@ import TodoList from 'components/TodoList/TodoList';
 import FilterBlock from 'components/UI/FilterBlock/FilterBlock';
 import Select from 'components/UI/Select/Select';
 
-import { fetchTodo } from 'api/api';
+import { fetchTodos, filterTodos } from 'redux/actions';
 
 import classes from './Home.module.scss';
 
@@ -26,43 +27,19 @@ const MOCK_OPTIONS = [
 ];
 
 const Home = () => {
-  const [todos, setTodos] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const { todos, loading } = useSelector((state) => state);
   const [value, setValue] = useState('');
 
-  const fetchData = async () => {
-    setLoading(true);
-    const todoList = await fetchTodo();
-    setTodos(todoList);
-    setLoading(false);
-  };
-
   useEffect(() => {
-    fetchData();
-  }, []);
+    dispatch(fetchTodos());
+  }, [dispatch]);
 
   const handleChange = (e) => setValue(e.target.value);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    setLoading(true);
-
-    if (!value) {
-      await fetchData();
-      return;
-    }
-
-    const newTodos = await fetchTodo();
-    const parsed = Boolean(parseInt(value, 10));
-
-    if (parsed === true) {
-      const filterTodo = newTodos.filter((todo) => todo.isCompleted);
-      setTodos(filterTodo);
-    } else {
-      const filterTodo = newTodos.filter((todo) => !todo.isCompleted);
-      setTodos(filterTodo);
-    }
-    setLoading(false);
+    dispatch(filterTodos(value));
   };
 
   return (
@@ -84,8 +61,8 @@ const Home = () => {
         />
       </FilterBlock>
       <div className={classes.todo_list_wrapper}>
-        <TodoForm setTodos={setTodos} />
-        <TodoList todos={todos} setTodos={setTodos} />
+        <TodoForm setTodos={() => {}} />
+        <TodoList todos={todos} setTodos={() => {}} />
       </div>
     </div>
   );
