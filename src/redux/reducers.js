@@ -27,8 +27,16 @@ const rootReducer = (state = INITIAL_STATE, action) => {
       return { ...state, loading };
     }
     case 'ADD_TODO_SUCCESS': {
-      const { loading, todos, todo } = action.payload;
-      return { ...state, loading, todos, todo };
+      const { loading, todos } = action.payload;
+      return { ...state, loading, todos };
+    }
+    case 'COMPLETE_TODO_REQUEST': {
+      const { loading } = action.payload;
+      return { ...state, loading };
+    }
+    case 'COMPLETE_TODO_SUCCESS': {
+      const { loading, todos } = action.payload;
+      return { ...state, loading, todos };
     }
     default:
       return state;

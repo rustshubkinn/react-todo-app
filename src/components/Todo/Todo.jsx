@@ -4,25 +4,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import { completeTodoById } from 'redux/actions';
+import { useDispatch } from 'react-redux';
 
 import Button from 'components/UI/Button/Button';
 import Loader from 'components/UI/Loader/Loader';
 import TodoForm from 'components/TodoForm/TodoForm';
 
-import { fetchTodo, deleteTodo, completeTodo } from 'api/api';
+import { fetchTodo, deleteTodo } from 'api/api';
 
 import classes from './Todo.module.scss';
 
 const Todo = ({ text, id, isCompleted, setTodos, className }) => {
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
 
   const completeTodoHandler = async () => {
-    setLoading(true);
-    await completeTodo(id, isCompleted);
-    const newTodos = await fetchTodo();
-    setTodos(newTodos);
-    setLoading(false);
+    dispatch(completeTodoById(id, isCompleted));
   };
 
   const deleteTodoHandler = async () => {

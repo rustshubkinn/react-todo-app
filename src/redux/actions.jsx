@@ -1,4 +1,4 @@
-import { fetchTodo, postTodo } from 'api/api';
+import { fetchTodo, postTodo, completeTodo } from 'api/api';
 
 export const fetchTodos = () => async (dispatch) => {
   dispatch({
@@ -86,7 +86,7 @@ export const addTodo = (value) => async (dispatch) => {
     return;
   }
 
-  const todo = await postTodo(newTodo);
+  await postTodo(newTodo);
   const result = await fetchTodo();
 
   dispatch({
@@ -94,7 +94,26 @@ export const addTodo = (value) => async (dispatch) => {
     payload: {
       loading: false,
       todos: result,
-      todo,
+    },
+  });
+};
+
+export const completeTodoById = (id, isCompleted) => async (dispatch) => {
+  dispatch({
+    type: 'COMPLETE_TODO_REQUEST',
+    payload: {
+      loading: true,
+    },
+  });
+
+  await completeTodo(id, isCompleted);
+  const result = await fetchTodo();
+
+  dispatch({
+    type: 'COMPLETE_TODO_SUCCESS',
+    payload: {
+      loading: false,
+      todos: result,
     },
   });
 };
