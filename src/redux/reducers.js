@@ -1,10 +1,11 @@
 /* eslint-disable indent */
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   todos: [],
   loading: false,
+  currentTodo: { text: '', body: '' },
 };
 
-const rootReducer = (state = INITIAL_STATE, action) => {
+export const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'FETCH_TODOS_REQUEST': {
       const { todos, loading } = action.payload;
@@ -54,9 +55,23 @@ const rootReducer = (state = INITIAL_STATE, action) => {
       const { loading, todos } = action.payload;
       return { ...state, loading, todos };
     }
+    case 'OPEN_TODO_REQUEST': {
+      const { loading } = action.payload;
+      return { ...state, loading };
+    }
+    case 'OPEN_TODO_SUCCESS': {
+      const { loading, currentTodo } = action.payload;
+      return { ...state, loading, currentTodo };
+    }
+    case 'EDIT_OPENED_TODO_REQUEST': {
+      const { loading } = action.payload;
+      return { ...state, loading };
+    }
+    case 'EDIT_OPENED_TODO_SUCCESS': {
+      const { loading } = action.payload;
+      return { ...state, loading };
+    }
     default:
-      return state;
+      return { ...state };
   }
 };
-
-export default rootReducer;

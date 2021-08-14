@@ -4,6 +4,7 @@ import {
   completeTodo,
   deleteTodo,
   editTodo,
+  fetchTodoById,
 } from 'api/api';
 
 export const fetchTodos = () => async (dispatch) => {
@@ -158,6 +159,44 @@ export const editTodoById = (id, text) => async (dispatch) => {
     payload: {
       loading: false,
       todos: result,
+    },
+  });
+};
+
+export const openTodo = (id) => async (dispatch) => {
+  dispatch({
+    type: 'OPEN_TODO_REQUEST',
+    payload: {
+      loading: true,
+    },
+  });
+
+  const currentTodo = await fetchTodoById(id);
+
+  dispatch({
+    type: 'OPEN_TODO_SUCCESS',
+    payload: {
+      loading: false,
+      currentTodo,
+    },
+  });
+};
+
+export const editOpenedTodo = (id, formValues) => async (dispatch) => {
+  dispatch({
+    type: 'EDIT_OPENED_TODO_REQUEST',
+    payload: {
+      loading: true,
+    },
+  });
+
+  const newTodo = { text: formValues.text, body: formValues.body };
+  await editTodo(id, newTodo);
+
+  dispatch({
+    type: 'EDIT_OPENED_TODO_SUCCESS',
+    payload: {
+      loading: false,
     },
   });
 };
